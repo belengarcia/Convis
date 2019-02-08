@@ -29,13 +29,27 @@ app.use(function(req, res, next) {
 
 // error handler
 app.use(function(err, req, res, next) {
+  console.log(err);
+  res.status(err.status || 500);
+
+  const data = {}
+
+  if(err instanceof mongoose.Error.ValidationError){
+    res.status(400);
+    for(field of Object.keys(err.errors)) {
+      err.errors[field] = err.errors[field].message
+    }
+    data.errors = err.errors
+  } else if (err instanceof mongoose.Error.CastError) {
+    error = createError(404, 'Resource not found')
+  }
+  
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+  data.message = err.message;
+  res.json(data)
 });
 
 module.exports = app;
