@@ -1,0 +1,19 @@
+Models:
+- Padre/madre/tutor
+nombre: string
+apellidos: string
+mail: string
+password: string
+hijas [array objetos]
+
+- hijas
+nombre: string
+apellidos: string
+convivencias: [array]
+
+- convivencias
+nombre: string
+fechas: date
+img: string
+description: string
+attendees: [array hijas]
