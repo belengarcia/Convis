@@ -13,9 +13,10 @@ const attendeeSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Convi'
     },
-    status: false,
-    payed: Number,
-    topay: Number
+    accepted: false, //confirmar por admin
+    status: false, //actualemente no activo (paypal)
+    payed: Number, //actualemente no activo (paypal)
+    topay: Number  //actualemente no activo (paypal)
 }, {timestamps: true,
     toJSON: {
         transform: (doc, ret) => {
