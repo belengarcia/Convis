@@ -3,7 +3,7 @@ const Attendee = require('../models/attendee.model');
 
 module.exports.create = (req, res, next) => {
     attendee = new Attendee({
-        kid: req.body.kid,
+        kid: req.body.kidId, //en el front pasar el id (selector de kis asociado al parent)
         parent: req.user.id,
         convi: req.params.id
     })

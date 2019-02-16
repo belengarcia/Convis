@@ -15,6 +15,7 @@ var usersRouter = require('./routes/users');
 const convisRouter = require('./routes/convis');
 const attendeesRouter = require('./routes/attendees');
 const sessionsRouter = require('./routes/sessions');
+const kidsRouter = require('./routes/kids');
 
 var app = express();
 
@@ -39,8 +40,9 @@ app.use(passport.session());
 app.use('/', indexRouter);
 app.use('/sessions', sessionsRouter);
 app.use('/users', usersRouter);
+app.use('/users/:id/kid', kidsRouter)
 app.use('/convis', convisRouter);
-app.use('convis/:id/attendees', attendeesRouter);
+app.use('/convis/:id/attendees', attendeesRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
