@@ -52,12 +52,12 @@ module.exports.update = (req, res, next) => {
         price: req.body.price
     }
 
-    User.findByIdAndUpdate(req.params.id, {$set : changes}, { new: true, runValidators: true })
-        .then(user => {
-            if(!user) {
+    Convi.findByIdAndUpdate(req.params.id, {$set : changes}, { new: true, runValidators: true })
+        .then(convi => {
+            if(!convi) {
                 throw createError(404, 'User not found')
             } else {
-                res.json(user)
+                res.json(convi)
             }
         })
         .catch(error => next(error))

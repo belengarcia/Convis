@@ -51,19 +51,18 @@ module.exports.delete = (req, res, next) => {
         .catch()
 }
 
-module.exports.updateStatus = (req, res, next) => {
-    
+module.exports.updateAccept = (req, res, next) => {
     Attendee.findById(req.params.attendeeId)
         .then(attendee => {
             if(!attendee){
                 throw createError(404, 'attendee not found')
             } else {
-                const newStatus = !attendee.status;
+                const newAccept = !attendee.accepted;
 
-                attendee.set({ "status": newStatus });
+                attendee.set({ "status": newAccept });
                 attendee.save()
                 .then(() => {
-                    res.json(fuckOff)
+                    res.json(attendee)
                 })
                 .catch(error => next(error));
             }

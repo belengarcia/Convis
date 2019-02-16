@@ -55,7 +55,7 @@ module.exports.delete = (req, res, enxt) => {
 module.exports.update = (req, res, next) => {
     changes = {
         name: req.body.name,
-        img: req.body.img,
+        profilePic: req.body.profilePic,
         mail: req.body.mail
         //password: req.body.password
     }

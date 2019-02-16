@@ -59,12 +59,12 @@ module.exports.update = (req, res, next) => {
         allergies: req.body.allergies
     }
 
-    User.findByIdAndUpdate(req.params.id, {$set : changes}, { new: true, runValidators: true })
-        .then(user => {
-            if(!user) {
+    Kid.findByIdAndUpdate(req.params.kidId, {$set : changes}, { new: true, runValidators: true })
+        .then(kid => {
+            if(!kid) {
                 throw createError(404, 'User not found')
             } else {
-                res.json(user)
+                res.json(kid)
             }
         })
         .catch(error => next(error))
