@@ -4,13 +4,17 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 let mongoose = require('mongoose');
+const session = require('express-session');
+const passport = require('passport');
 
 require('./configs/db.config');
+require('./configs/passport.config').setup(passport);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const convisRouter = require('./routes/convis');
 const attendeesRouter = require('./routes/attendees');
+const sessionsRouter = require('./routes/sessions');
 
 var app = express();
 
@@ -33,6 +37,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/', indexRouter);
+app.use('/sessions', sessionsRouter);
 app.use('/users', usersRouter);
 app.use('/convis', convisRouter);
 app.use('convis/:id/attendees', attendeesRouter);
