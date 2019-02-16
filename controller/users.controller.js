@@ -51,3 +51,22 @@ module.exports.delete = (req, res, enxt) => {
         })
         .catch(error => next(error));
 }
+
+module.exports.update = (req, res, next) => {
+    changes = {
+        name: req.body.name,
+        img: req.body.img,
+        mail: req.body.mail
+        //password: req.body.password
+    }
+
+    User.findByIdAndUpdate(req.params.id, {$set : changes}, { new: true, runValidators: true })
+        .then(user => {
+            if(!user) {
+                throw createError(404, 'User not found')
+            } else {
+                res.json(user)
+            }
+        })
+        .catch(error => next(error))
+}

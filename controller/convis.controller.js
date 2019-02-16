@@ -42,3 +42,23 @@ module.exports.delete = (req, res, next) => {
             }
         })
 }
+
+module.exports.update = (req, res, next) => {
+    changes = {
+        title: req.body.title,
+        description: req.body.description,
+        loaction: req.body.location,
+        date: req.body.date,
+        price: req.body.price
+    }
+
+    User.findByIdAndUpdate(req.params.id, {$set : changes}, { new: true, runValidators: true })
+        .then(user => {
+            if(!user) {
+                throw createError(404, 'User not found')
+            } else {
+                res.json(user)
+            }
+        })
+        .catch(error => next(error))
+}

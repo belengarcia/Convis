@@ -6,5 +6,6 @@ router.post('/', attendeeController.create);
 router.get('/', attendeeController.list);
 router.get('/:attendeeId', attendeeController.get);
 router.delete('/:attendeeId', attendeeController.delete);
+router.post('/:attendeeId/updateStatus', attendeeController.updateStatus);
 
 module.exports = router;

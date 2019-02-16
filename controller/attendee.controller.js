@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Attendee = require('../models/attendee.model');
 
+
 module.exports.create = (req, res, next) => {
     attendee = new Attendee({
         kid: req.body.kidId, //en el front pasar el id (selector de kis asociado al parent)
@@ -48,4 +49,25 @@ module.exports.delete = (req, res, next) => {
             }
         })
         .catch()
+}
+
+module.exports.updateStatus = (req, res, next) => {
+    
+    Attendee.findById(req.params.attendeeId)
+        .then(attendee => {
+            if(!attendee){
+                throw createError(404, 'attendee not found')
+            } else {
+                const newStatus = !attendee.status;
+
+                attendee.set({ "status": newStatus });
+                attendee.save()
+                .then(() => {
+                    res.json(fuckOff)
+                })
+                .catch(error => next(error));
+            }
+        })
+
+        .catch(error => next(error));
 }
